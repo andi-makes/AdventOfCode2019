@@ -11,7 +11,7 @@
 #define RETURNCODE_COMPLETED 0
 #define RETURNCODE_UNKNOWN_EXPRESSION 1
 
-std::vector<int> compute(std::vector<int> intcode) {
+std::vector<int> compute(std::vector<int> intcode, bool no_output = false) {
     for (int offset = 0; offset < intcode.size(); offset += 4) {
         switch (intcode[offset]) {
             case INTCODE_ADDITION:
@@ -21,11 +21,13 @@ std::vector<int> compute(std::vector<int> intcode) {
                 intcode[intcode[offset+3]] = intcode[intcode[offset + 1]] * intcode[intcode[offset + 2]];
                 break;
             case INTCODE_HALT:
-                std::cout << "Encountered HALT expression.\nTerminating program.\n";
+                if (!no_output)
+                    std::cout << "Encountered HALT expression.\nTerminating program.\n";
                 return intcode;
                 break;
             default:
-                std::cout << "Encountered unknown expression `" << intcode[offset] << "` at position `" << offset << "`.\nTerminating program.\n";
+                if (!no_output)
+                    std::cout << "Encountered unknown expression `" << intcode[offset] << "` at position `" << offset << "`.\nTerminating program.\n";
                 return intcode;
                 break;
         }
@@ -84,7 +86,7 @@ int main() {
             auto intc = loadFile("input.txt");
             intc[1] = x;
             intc[2] = y;
-            intc = compute(intc);
+            intc = compute(intc, true);
             if (intc[0] == 19690720) {
                 std::cout << "Got the result: " << x * 100 + y << "\n";
                 return 0;
