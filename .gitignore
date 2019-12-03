@@ -1,3 +1,8 @@
 *.out
 input.txt
 .vscode
+
+# Stuff that is not finished:
+lib
+makefile
+test.cpp
