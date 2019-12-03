@@ -21,6 +21,7 @@ public:
 };
 
 int main() {
+    std::cout << "Day 3, Part 1\n";
     std::ifstream input_file("input.txt");
 
     std::vector<std::string> commands[2];
@@ -188,6 +189,95 @@ int main() {
     }
     
     std::cout << best_distance << "\n";
+
+    std::cout << "Day 3, Part 2\n";
+    int best_sum = 100000000;
+    for (int j = 0; j < cross_points.size(); ++j) {
+        int path0 = 0;
+        for (int i = 0; i < lines[0].size(); ++i) {
+            if (
+                lines[0][i].dir_ == 'R' &&
+                cross_points[j].x_ >= lines[0][i].start_.x_ &&
+                cross_points[j].x_ <= lines[0][i].start_.x_ + lines[0][i].length_ &&
+                cross_points[j].y_ == lines[0][i].start_.y_
+            ) {
+                path0 += cross_points[j].x_ - lines[0][i].start_.x_;
+                break;
+            } else if (
+                lines[0][i].dir_ == 'L' &&
+                cross_points[j].x_ <= lines[0][i].start_.x_ &&
+                cross_points[j].x_ >= lines[0][i].start_.x_ - lines[0][i].length_ &&
+                cross_points[j].y_ == lines[0][i].start_.y_
+            ) {
+                path0 -= cross_points[j].x_ - lines[0][i].start_.x_;
+                break;
+            } else if (
+                lines[0][i].dir_ == 'U' &&
+                cross_points[j].x_ == lines[0][i].start_.x_ &&
+                cross_points[j].y_ >= lines[0][i].start_.y_ &&
+                cross_points[j].y_ <= lines[0][i].start_.y_ + lines[0][i].length_
+            ) {
+                path0 += cross_points[j].y_ - lines[0][i].start_.y_;
+                break;
+            } else if (
+                lines[0][i].dir_ == 'D' &&
+                cross_points[j].x_ == lines[0][i].start_.x_ &&
+                cross_points[j].y_ <= lines[0][i].start_.y_ &&
+                cross_points[j].y_ >= lines[0][i].start_.y_ - lines[0][i].length_
+            ) {
+                path0 -= cross_points[j].y_ - lines[0][i].start_.y_;
+                break;
+            } else {
+                path0 += lines[0][i].length_;
+            }
+                   
+        }
+
+        int path1 = 0;
+        for (int i = 0; i < lines[1].size(); ++i) {
+            if (
+                lines[1][i].dir_ == 'R' &&
+                cross_points[j].x_ >= lines[1][i].start_.x_ &&
+                cross_points[j].x_ <= lines[1][i].start_.x_ + lines[1][i].length_ &&
+                cross_points[j].y_ == lines[1][i].start_.y_
+            ) {
+                path1 += cross_points[j].x_ - lines[1][i].start_.x_;
+                break;
+            } else if (
+                lines[1][i].dir_ == 'L' &&
+                cross_points[j].x_ <= lines[1][i].start_.x_ &&
+                cross_points[j].x_ >= lines[1][i].start_.x_ - lines[1][i].length_ &&
+                cross_points[j].y_ == lines[1][i].start_.y_
+            ) {
+                path1 -= cross_points[j].x_ - lines[1][i].start_.x_;
+                break;
+            } else if (
+                lines[1][i].dir_ == 'U' &&
+                cross_points[j].x_ == lines[1][i].start_.x_ &&
+                cross_points[j].y_ >= lines[1][i].start_.y_ &&
+                cross_points[j].y_ <= lines[1][i].start_.y_ + lines[1][i].length_
+            ) {
+                path1 += cross_points[j].y_ - lines[1][i].start_.y_;
+                break;
+            } else if (
+                lines[1][i].dir_ == 'D' &&
+                cross_points[j].x_ == lines[1][i].start_.x_ &&
+                cross_points[j].y_ <= lines[1][i].start_.y_ &&
+                cross_points[j].y_ >= lines[1][i].start_.y_ - lines[1][i].length_
+            ) {
+                path1 -= cross_points[j].y_ - lines[1][i].start_.y_;
+                break;
+            } else {
+                path1 += lines[1][i].length_;
+            }
+        }
+        int sum = path0 + path1;
+        if (sum < best_sum) {
+            best_sum = sum;
+        }
+    }
+
+    std::cout << best_sum << "\n";
 
     // for (int i = 0; i < 2; i++) {
     //     for (Line l : lines[i])
