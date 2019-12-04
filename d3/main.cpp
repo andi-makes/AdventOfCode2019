@@ -22,7 +22,7 @@ public:
 
 int main() {
     std::cout << "Day 3, Part 1\n";
-    std::ifstream input_file("input.txt");
+    std::ifstream input_file("inputs/d3.txt");
 
     std::vector<std::string> commands[2];
     std::vector<Line> lines[2];

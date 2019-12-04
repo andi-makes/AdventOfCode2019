@@ -62,7 +62,7 @@ void printIntcode(std::vector<int> a) {
  * @return std::vector<int> content of file parsed as intcode
  */
 std::vector<int> loadFile(std::string filename) {
-    std::ifstream intcode_file("input.txt");
+    std::ifstream intcode_file(filename);
 
     std::vector<int> intc;
     while(!intcode_file.eof()) {
@@ -81,16 +81,16 @@ std::vector<int> loadFile(std::string filename) {
         }
     }
 
-    return intc;
-    
     intcode_file.close();
+    
+    return intc;
 }
 
 int main() {
     std::cout << "Intcode Computer - Day 2\n";
     {
         std::cout << "\n$ Part 1:\n";
-        auto intc = loadFile("input.txt");
+        auto intc = loadFile("inputs/d2.txt");
 
         intc = compute(intc, true);
         std::cout << "Computed input. Result: \n";
@@ -100,7 +100,7 @@ int main() {
         std::cout << "\n$ Part 2:\n";
         for (int x = 0; x < 100; ++x) {
             for (int y = 0; y < 100; ++y) {
-                auto intc = loadFile("input.txt");
+                auto intc = loadFile("inputs/d2.txt");
                 intc[1] = x;
                 intc[2] = y;
                 intc = compute(intc, true);

@@ -13,7 +13,7 @@ int calcFuelForFuel(int fuel) {
 
 int main() {
 	std::cout << "Day 1" << std::endl;
-	std::ifstream file("input.txt");
+	std::ifstream file("inputs/d1.txt");
 
 	int a;
 	long b = 0;
