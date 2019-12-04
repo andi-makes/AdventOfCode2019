@@ -8,7 +8,7 @@
 DragonCoder's "**beautiful**" `C++` solutions for Advent of Code 2019!
 
 ## Compiling the code
-To compile the code, navigate to the build dir and run `make`. The Makefile is generated via CMake. I followed [this](https://www.youtube.com/watch?v=HPMvU64RUTY) YouTube Video. The file is generated for a *nix system.
+I followed [this](https://www.youtube.com/watch?v=HPMvU64RUTY) YT video on How to compile using cmake, I don't have any clues what I am doing. But it works and is fairly easy, so that is good enough :D
 
 ### Check out other solutions...
 ... that probably are better than mine :D
