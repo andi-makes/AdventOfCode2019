@@ -10,5 +10,5 @@ Makefile
 
 # Stuff that is not finished:
 # But I tell ya: That stuff is working, I just wanna hide it 'cause I think it will gimme an advantage for some coming challange ;D
-lib
-test/
+# lib
+# test/
