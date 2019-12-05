@@ -9,23 +9,14 @@ public:
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
-
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|";
-        for (int i : parameter_mode) {
-            std::cout << i;
-        } 
-        std::cout << "|: [" << memory[instruction_ptr+3] << "] = [" << 
+        std::cout << "[" << memory[instruction_ptr+3] << "] = [" << 
             memory[instruction_ptr + 1] << "] + [" 
             << memory[instruction_ptr + 2] << "]\n";
         memory[memory[instruction_ptr+3]] = parameter[0] + parameter[1];
@@ -39,23 +30,15 @@ class Multiplication : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|";
-        for (int i : parameter_mode) {
-            std::cout << i;
-        } 
-        std::cout << "|: [" << memory[instruction_ptr+3] << "] = [" << 
+        std::cout << "[" << memory[instruction_ptr+3] << "] = [" << 
             memory[instruction_ptr + 1] << "] * [" 
             << memory[instruction_ptr + 2] << "]\n";
         memory[memory[instruction_ptr+3]] = parameter[0] * parameter[1];
@@ -68,11 +51,7 @@ class Input : public Instruction {
     int parameter_count() { return 1; }
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
-        std::cout << "|" << instruction_ptr << "|";
-        for (int i : parameter_mode) {
-            std::cout << i;
-        } 
-        std::cout << "|: [" << memory[instruction_ptr+1] << "] := ";
+        std::cout <<  memory[instruction_ptr+1] << " := ";
         std::cin >> memory[memory[instruction_ptr+1]];
         
         return instruction_ptr + parameter_count() + 1;
@@ -85,18 +64,15 @@ class Output : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        std::cout << "|" << instruction_ptr << "|";
-        for (int i : parameter_mode) {
-            std::cout << i;
-        } 
-        std::cout << "|: "
-            "[" << memory[instruction_ptr+1] << "] = " << 
+        std::cout << "[" << memory[instruction_ptr+1] << "] = " << 
             parameter[0] << "\n";        
         return instruction_ptr + parameter_count() + 1;
     }
@@ -108,19 +84,15 @@ class JMP_True : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|: JMP to " << 
+        std::cout << "JMP to " << 
             "[" << parameter[1] << "] if " << parameter[0] << " true\n";
         if (parameter[0]) {
             return parameter[1];
@@ -136,19 +108,15 @@ class JMP_False : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|: JMP to " << 
+        std::cout << "JMP to " << 
             "[" << parameter[1] << "] if " << parameter[0] << " false\n";
         if (!parameter[0]) {
             return parameter[1];
@@ -164,20 +132,15 @@ class Less : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|: " << 
-            "[" << memory[instruction_ptr+3] << "] = " << parameter[0] << " < " << parameter[1] << "\n";
+        std::cout << "[" << memory[instruction_ptr+3] << "] = " << parameter[0] << " < " << parameter[1] << "\n";
         
         memory[memory[instruction_ptr+3]] = parameter[0] < parameter[1];
 
@@ -191,26 +154,15 @@ class Equal : public Instruction {
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
         std::vector<int> parameter;
-        if (parameter_mode[0] == 1) {
-            parameter.push_back(memory[instruction_ptr + 1]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 1]]);
+        for (int i = 0; i < parameter_count(); ++i) {
+            if (parameter_mode[i] == 1) {
+                parameter.push_back(memory[instruction_ptr + 1 + i]);
+            } else {
+                parameter.push_back(memory[memory[instruction_ptr + 1 + i]]);
+            }
         }
 
-        if (parameter_mode[1] == 1) {
-            parameter.push_back(memory[instruction_ptr + 2]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 2]]);
-        }
-
-        if (parameter_mode[2] == 1) {
-            parameter.push_back(memory[instruction_ptr + 3]);
-        } else {
-            parameter.push_back(memory[memory[instruction_ptr + 3]]);
-        }
-
-        std::cout << "|" << instruction_ptr << "|: " << 
-            "[" << memory[instruction_ptr+3] << "] = " << parameter[0] << " == " << parameter[1] << "\n";
+        std::cout << "[" << memory[instruction_ptr+3] << "] = " << parameter[0] << " == " << parameter[1] << "\n";
         
         memory[memory[instruction_ptr+3]] = parameter[0] == parameter[1];
 
@@ -223,7 +175,7 @@ class Halt : public Instruction {
     int parameter_count() { return 0; }
 
     int code(std::vector<int>& memory, int instruction_ptr, std::vector<int> parameter_mode) {
-        std::cout << "|" << instruction_ptr << "|: HALT\n";
+        std::cout << "HALT\n";
         return HALT_INSTRUCTION;
     }
 };

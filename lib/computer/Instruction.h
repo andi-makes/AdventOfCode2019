@@ -31,6 +31,8 @@ public:
                 parameter_modes.push_back(0);
             }
 
+            std::cout << "{ [" << instruction_ptr << "], " << memory[instruction_ptr] << " }: ";
+
             int ret = code(memory, instruction_ptr, parameter_modes);
             if (ret < 0) {
                 return HALT_INSTRUCTION;
