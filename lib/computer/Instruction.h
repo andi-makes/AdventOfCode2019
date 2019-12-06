@@ -30,31 +30,48 @@ public:
 };
 
 class Instruction {
+private:
+    bool isEnabled;
 public:
     virtual int code(std::vector<int>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) = 0;
 
     virtual int opcode() = 0;
     virtual int parameter_count() = 0;
 
+    Instruction() : isEnabled(false) {}
+
+    void enable() {
+        isEnabled = true;
+    }
+
+    void disable() {
+        isEnabled = false;
+    }
+
+    bool enabled() {
+        return isEnabled;
+    }
+
     int execute(std::vector<int>& memory, int& instruction_ptr) {
-        if (opcode() == memory[instruction_ptr] % 100) {
+        if (isEnabled) {
+            if (opcode() == memory[instruction_ptr] % 100) {
+                std::vector<Parameter*> parameter;
+                for (int i = 0; i < parameter_count(); ++i) {
+                    parameter.push_back(new Parameter(memory, instruction_ptr, i, parameter_count()));
+                }
 
-            std::vector<Parameter*> parameter;
-            for (int i = 0; i < parameter_count(); ++i) {
-                parameter.push_back(new Parameter(memory, instruction_ptr, i, parameter_count()));
-            }
+                std::cout << "{ [" << std::setw(3) << instruction_ptr << "], " << std::setw(4) << memory[instruction_ptr] << " }: ";
 
-            std::cout << "{ [" << std::setw(3) << instruction_ptr << "], " << std::setw(4) << memory[instruction_ptr] << " }: ";
-
-            int ret = code(memory, instruction_ptr, parameter);
-            if (ret < 0) {
-                return HALT_INSTRUCTION;
-            } else {
-                instruction_ptr = ret;
-                return SUCCESSFUL_INSTRUCTION;
+                int ret = code(memory, instruction_ptr, parameter);
+                if (ret < 0) {
+                    return HALT_INSTRUCTION;
+                } else {
+                    instruction_ptr = ret;
+                    return SUCCESSFUL_INSTRUCTION;
+                }
             }
         }
-        return FAILED_INSTRUCTION;
+        return FAILED_INSTRUCTION; 
     }
 };
 

@@ -14,7 +14,22 @@ private:
     std::vector<int> memory_;
     std::vector<Instruction*> instruction_set_;
 public:
-    Computer(std::vector<Instruction*> instruction_set) : memory_(), instruction_set_(instruction_set) {}
+    void printInstructionSet() {
+        for (int i = 0; i < instruction_set_.size(); ++i) {
+            std::cout << instruction_set_[i]->opcode() << ", ";
+            if (instruction_set_[i]->enabled()) {
+                std::cout << "enabled\n";
+            } else {
+                std::cout << "disabled\n";
+            }
+        }
+    }
+
+    Computer(std::vector<Instruction*> instruction_set) : memory_(), instruction_set_(instruction_set) {
+        std::cout << " ~~~ Intcode Computer ~~~ \n";
+        std::cout << "Booted up!\n";
+        std::cout << "Commands: load [filename], enable [opcode], disable [opcode], run\n";
+    }
 
     void load_memory(std::vector<int> memory) {
         memory_.clear();
