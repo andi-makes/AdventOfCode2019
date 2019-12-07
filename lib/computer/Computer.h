@@ -46,7 +46,7 @@ public:
         }
     }
 
-    void execute() {
+    int execute() {
         int instruction_ptr = 0;
         for (int j = 0; j < memory_.size(); ++j) {
             int exit_code = 0;
@@ -59,9 +59,10 @@ public:
                 }
             }
             if (exit_code == HALT_INSTRUCTION) {
-                break;
+                return 0;
             }
         }
+        return 1;
     }
 
     void alter_memory(int new_value, int address) {
