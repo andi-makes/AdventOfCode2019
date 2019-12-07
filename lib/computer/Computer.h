@@ -14,6 +14,7 @@ private:
     std::vector<int> memory_;
     std::vector<Instruction*> instruction_set_;
     int instruction_ptr_;
+    bool halt_on_output_;
 public:
     void printInstructionSet() {
         for (int i = 0; i < instruction_set_.size(); ++i) {
@@ -26,10 +27,9 @@ public:
         }
     }
 
-    Computer(std::vector<Instruction*> instruction_set) : memory_(), instruction_set_(instruction_set) {
+    Computer(std::vector<Instruction*> instruction_set, bool halt_on_output = false) : memory_(), instruction_set_(instruction_set), halt_on_output_(halt_on_output) {
         std::cout << " ~~~ Intcode Computer ~~~ \n";
         std::cout << "Booted up!\n";
-        std::cout << "Commands: load [filename], enable [opcode], disable [opcode], run\n";
     }
 
     void load_memory(std::vector<int> memory) {
@@ -55,16 +55,13 @@ public:
             for (int i = 0; i < instruction_set_.size(); ++i) {
                 exit_code = instruction_set_[i]->execute(memory_, instruction_ptr_);
                 if (exit_code == SUCCESSFUL_INSTRUCTION) {
-                    if (instruction_set_[i]->opcode() == 4) {
-                        return 1;
+                    if (instruction_set_[i]->opcode() == 4 && halt_on_output_) {
+                        return 0;
                     }
                     break;
                 } else if (exit_code == HALT_INSTRUCTION) {
-                    break;
+                    return 0;
                 }
-            }
-            if (exit_code == HALT_INSTRUCTION) {
-                return 0;
             }
         }
         return 1;

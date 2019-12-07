@@ -11,6 +11,8 @@ int main() {
     Computer ampD = Computer(instruction_set.get());
     Computer ampE = Computer(instruction_set.get());
     int highest = 0;
+    nextInput = -1;
+    lastOutput = 0;
     for (int a = 0; a < 5; ++a) {
         for (int b = 0; b < 5; ++b) {
             for (int c = 0; c < 5; ++c) {
@@ -65,11 +67,11 @@ int main() {
                             if (b != c && b != d && b != e) {
                                 if (c != d && c != e) {
                                     if (d != e) {
-                                        Computer coma = Computer(instruction_set.get());
-                                        Computer comb = Computer(instruction_set.get());
-                                        Computer comc = Computer(instruction_set.get());
-                                        Computer comd = Computer(instruction_set.get());
-                                        Computer come = Computer(instruction_set.get());
+                                        Computer coma = Computer(instruction_set.get(), true);
+                                        Computer comb = Computer(instruction_set.get(), true);
+                                        Computer comc = Computer(instruction_set.get(), true);
+                                        Computer comd = Computer(instruction_set.get(), true);
+                                        Computer come = Computer(instruction_set.get(), true);
                                         
                                         coma.load_from_file("inputs/d7.txt");
                                         comb.load_from_file("inputs/d7.txt");

@@ -5,7 +5,7 @@
 #include <iostream>
 
 int nextInput = -1;
-int lastOutput = 0;
+int lastOutput = -1;
 
 class Input : public Instruction {
     int opcode() { return 3; }
