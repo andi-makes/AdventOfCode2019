@@ -13,6 +13,7 @@ class Computer {
 private:
     std::vector<int> memory_;
     std::vector<Instruction*> instruction_set_;
+    int instruction_ptr_;
 public:
     void printInstructionSet() {
         for (int i = 0; i < instruction_set_.size(); ++i) {
@@ -33,12 +34,14 @@ public:
 
     void load_memory(std::vector<int> memory) {
         memory_.clear();
+        instruction_ptr_ = 0;
         memory_ = memory;
     }
 
     void load_from_file(std::string filename) {
         std::ifstream input(filename);
         memory_.clear();
+        instruction_ptr_ = 0;
 
         std::string code;
         while(std::getline(input, code, ',')) {
@@ -47,12 +50,14 @@ public:
     }
 
     int execute() {
-        int instruction_ptr = 0;
         for (int j = 0; j < memory_.size(); ++j) {
             int exit_code = 0;
             for (int i = 0; i < instruction_set_.size(); ++i) {
-                exit_code = instruction_set_[i]->execute(memory_, instruction_ptr);
+                exit_code = instruction_set_[i]->execute(memory_, instruction_ptr_);
                 if (exit_code == SUCCESSFUL_INSTRUCTION) {
+                    if (instruction_set_[i]->opcode() == 4) {
+                        return 1;
+                    }
                     break;
                 } else if (exit_code == HALT_INSTRUCTION) {
                     break;

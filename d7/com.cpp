@@ -52,7 +52,10 @@ int main() {
     }
     std::cout << "Highest Number: " << highest << "\n";
     std::cout << "Part 2:\n";
+    std::cout << "With the help of this reddit post: https://www.reddit.com/r/adventofcode/comments/e7aqcb/2019_day_7_part_2_confused_with_the_question/";
     highest = 0;
+    nextInput = -1;
+    lastOutput = -1;
     for (int a = 5; a < 10; ++a) {
         for (int b = 5; b < 10; ++b) {
             for (int c = 5; c < 10; ++c) {
@@ -62,40 +65,37 @@ int main() {
                             if (b != c && b != d && b != e) {
                                 if (c != d && c != e) {
                                     if (d != e) {
-                                        // std::cerr << "AROUND\n";
-                                        ampA.load_from_file("inputs/d7.txt");
-                                        ampB.load_from_file("inputs/d7.txt");
-                                        ampC.load_from_file("inputs/d7.txt");
-                                        ampD.load_from_file("inputs/d7.txt");
-                                        ampE.load_from_file("inputs/d7.txt");
-                                        // std::vector<int> code = {3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5};
-                                        // ampA.load_memory(code);
-                                        // ampB.load_memory(code);
-                                        // ampC.load_memory(code);
-                                        // ampD.load_memory(code);
-                                        // ampE.load_memory(code);
+                                        Computer coma = Computer(instruction_set.get());
+                                        Computer comb = Computer(instruction_set.get());
+                                        Computer comc = Computer(instruction_set.get());
+                                        Computer comd = Computer(instruction_set.get());
+                                        Computer come = Computer(instruction_set.get());
+                                        
+                                        coma.load_from_file("inputs/d7.txt");
+                                        comb.load_from_file("inputs/d7.txt");
+                                        comc.load_from_file("inputs/d7.txt");
+                                        comd.load_from_file("inputs/d7.txt");
+                                        come.load_from_file("inputs/d7.txt");
+
+                                        nextInput = a;
                                         lastOutput = 0;
-                                        // nextInput = -1;
+                                        coma.execute();
+                                        nextInput = b;
+                                        comb.execute();
+                                        nextInput = c;
+                                        comc.execute();
+                                        nextInput = d;
+                                        comd.execute();
+                                        nextInput = e;
+                                        come.execute();
                                         int running = 1;
                                         while(running) {
-                                            std::cerr << "Running..." << "\n";
-                                            nextInput = a;
-                                            // nextInput = 9;
-                                            ampA.execute();
-                                            nextInput = b; // Comes from computer/IO.h
-                                            // nextInput = 8; // Comes from computer/IO.h
-                                            ampB.execute();
-                                            nextInput = c; // Comes from computer/IO.h
-                                            // nextInput = 7; // Comes from computer/IO.h
-                                            ampC.execute();
-                                            nextInput = d; // Comes from computer/IO.h
-                                            // nextInput = 6; // Comes from computer/IO.h
-                                            ampD.execute();
-                                            nextInput = e; // Comes from computer/IO.h
-                                            // nextInput = 5; // Comes from computer/IO.h
-                                            running = ampE.execute();
+                                            coma.execute();
+                                            comb.execute();
+                                            comc.execute();
+                                            comd.execute();
+                                            running = come.execute();
                                         }
-                                        std::cerr << "Finished Running!\n";
                                         if (lastOutput > highest) {
                                             highest = lastOutput;
                                         }
@@ -108,7 +108,13 @@ int main() {
             }
         }
     }
+    
+
+
+    
+
     std::cout << "Highest: " << highest << "\n";
     // Too high: 680366614
     // Too high: 591944528
+    // Maybe:     21596786 P.S: Yes!
 }
