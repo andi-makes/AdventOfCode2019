@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 
 include_directories(lib/)
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable(d1.x d1/main.cpp)
 add_executable(d2.x d2/main.cpp)
@@ -10,3 +12,4 @@ add_executable(d5.x d5/main.cpp)
 add_executable(d6.x d6/main.cpp)
 add_executable(d7.x d7/main.cpp)
 add_executable(test.x test/main.cpp)
+target_link_libraries(test.x ${CURSES_LIBRARIES})
