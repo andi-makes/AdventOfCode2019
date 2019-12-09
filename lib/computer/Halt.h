@@ -7,8 +7,8 @@ class Halt : public Instruction {
     int opcode() { return 99; }
     int parameter_count() { return 0; }
 
-    int code(std::vector<int>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
-        std::cout << "HALT\n";
+    int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
+        // std::cout << "HALT\n";
         return HALT_INSTRUCTION;
     }
 };

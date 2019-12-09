@@ -6,6 +6,7 @@
 #include "Math.h"
 #include "Conditionals.h"
 #include "Halt.h"
+#include "Base.h"
 
 #include <iostream>
 #include <vector>
@@ -21,6 +22,7 @@ public:
         instruction_set_.push_back(new JMP_False());
         instruction_set_.push_back(new Less());
         instruction_set_.push_back(new Equal());
+        instruction_set_.push_back(new Base());
         instruction_set_.push_back(new Output());
         instruction_set_.push_back(new Input());
         instruction_set_.push_back(new Halt());

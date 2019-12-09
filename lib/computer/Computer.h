@@ -11,7 +11,7 @@
 
 class Computer {
 private:
-    std::vector<int> memory_;
+    std::vector<int64_t> memory_;
     std::vector<Instruction*> instruction_set_;
     int instruction_ptr_;
     bool halt_on_output_;
@@ -32,10 +32,14 @@ public:
         std::cout << "Booted up!\n";
     }
 
-    void load_memory(std::vector<int> memory) {
+    void load_memory(std::vector<int64_t> memory) {
         memory_.clear();
         instruction_ptr_ = 0;
         memory_ = memory;
+
+        for (int i = memory_.size(); i < 2048; ++i) {
+            memory_.push_back(0);
+        }
     }
 
     void load_from_file(std::string filename) {
@@ -47,6 +51,9 @@ public:
         while(std::getline(input, code, ',')) {
             memory_.push_back(std::stoi(code));
         }
+        for (int i = memory_.size(); i < 2048; ++i) {
+            memory_.push_back(0);
+        }
     }
 
     int execute() {
@@ -55,6 +62,7 @@ public:
             for (int i = 0; i < instruction_set_.size(); ++i) {
                 exit_code = instruction_set_[i]->execute(memory_, instruction_ptr_);
                 if (exit_code == SUCCESSFUL_INSTRUCTION) {
+                    // std::cout << "Opcode: " << instruction_set_[i]->opcode() << "\n";
                     if (instruction_set_[i]->opcode() == 4 && halt_on_output_) {
                         return 0;
                     }
@@ -67,7 +75,7 @@ public:
         return 1;
     }
 
-    void alter_memory(int new_value, int address) {
+    void alter_memory(int64_t new_value, int address) {
         memory_[address] = new_value;
     }
 
@@ -75,7 +83,7 @@ public:
         return memory_[address];
     }
 
-    std::vector<int> get_memory() {
+    std::vector<int64_t> get_memory() {
         return memory_;
     }
 };
