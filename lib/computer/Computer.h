@@ -37,7 +37,7 @@ public:
         instruction_ptr_ = 0;
         memory_ = memory;
 
-        for (int i = memory_.size(); i < 2048*10; ++i) {
+        for (int i = memory_.size(); i < 2048*2048; ++i) {
             memory_.push_back(0);
         }
     }
@@ -51,7 +51,7 @@ public:
         while(std::getline(input, code, ',')) {
             memory_.push_back(std::stoi(code));
         }
-        for (int i = memory_.size(); i < 2048*10; ++i) {
+        for (int i = memory_.size(); i < 2048*2048; ++i) {
             memory_.push_back(0);
         }
     }
