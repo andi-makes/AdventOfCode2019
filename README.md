@@ -2,8 +2,8 @@
 
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2019-brightgreen)](https://adventofcode.com/2019/about)
 [![Language](https://img.shields.io/badge/Language-C%2B%2B-orange)](https://isocpp.org/)
-[![Days completed](https://img.shields.io/badge/Days%20completed-8-red)](https://github.com/DragonCoder01/AdventOfCode2019)
-[![Stars](https://img.shields.io/badge/Stars-16-yellow)](https://github.com/DragonCoder01/AdventOfCode2019)
+[![Days completed](https://img.shields.io/badge/Days%20completed-9-red)](https://github.com/DragonCoder01/AdventOfCode2019)
+[![Stars](https://img.shields.io/badge/Stars-18-yellow)](https://github.com/DragonCoder01/AdventOfCode2019)
 
 DragonCoder's "**beautiful**" `C++` solutions for Advent of Code 2019!
 
@@ -21,3 +21,4 @@ I followed [this](https://www.youtube.com/watch?v=HPMvU64RUTY) YT video on How t
 + FeldiM's [AdventOfCode19](https://github.com/feldim2425/AdventOfCode19)
 + derkalaender's [AdventOfCode](https://github.com/derkalaender/AdventOfCode)
 + Daan Breur's [AdventOfCode2019](https://github.com/daanbreur/AdventofCode2019)
++ 1Turtle's crazy Computercraft implementation: [AdventOfCode-for-Computercraft](https://github.com/1Turtle/AdventOfCode-for-Computercraft)
