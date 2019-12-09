@@ -9,7 +9,7 @@ int main() {
     instruction_set.enable_all();
 
     Computer com = Computer(instruction_set.get());
-    // std::vector<int64_t> code{104,1125899906842624,99};
+    // std::vector<int64_t> code{1102,34915192,34915192,7,4,7,99,0};
     // com.load_memory(code);
     com.load_from_file("inputs/d9.txt");
     com.execute();

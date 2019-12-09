@@ -10,13 +10,7 @@ public:
     int parameter_count() { return 3; }
 
     int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
-        // std::cout << "[" << memory[instruction_ptr+3] << "] = [" << 
-        //     memory[instruction_ptr + 1] << "] + [" 
-        //     << memory[instruction_ptr + 2] << "]\n";
-        if (parameter[2]->mode == 2) {
-            memory[base_ptr + memory[instruction_ptr+3]] = parameter[0]->param + parameter[1]->param;
-        } else 
-            memory[memory[instruction_ptr+3]] = parameter[0]->param + parameter[1]->param;
+        memory[parameter[2]->address] = memory[parameter[0]->address] + memory[parameter[1]->address];
         return instruction_ptr + parameter_count() + 1;
     }
 };
@@ -26,13 +20,7 @@ class Multiplication : public Instruction {
     int parameter_count() { return 3; }
 
     int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
-        // std::cout << "[" << memory[instruction_ptr+3] << "] = [" << 
-        //     memory[instruction_ptr + 1] << "] * [" 
-        //     << memory[instruction_ptr + 2] << "]\n";
-        if (parameter[2]->mode == 2) {
-            memory[base_ptr + memory[instruction_ptr+3]] = parameter[0]->param * parameter[1]->param;
-        } else 
-            memory[memory[instruction_ptr+3]] = parameter[0]->param * parameter[1]->param;
+        memory[parameter[2]->address] = memory[parameter[0]->address] * memory[parameter[1]->address];
         return instruction_ptr + parameter_count() + 1;
     }
 };

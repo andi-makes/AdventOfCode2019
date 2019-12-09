@@ -13,23 +13,19 @@ class Input : public Instruction {
 
     int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
         std::cout << "Input := ";
-        if (parameter[0]->mode == 2) {
-            std::cin >> memory[base_ptr + memory[instruction_ptr + 1]];
+
+        if (nextInput != -1) {
+            std::cout << nextInput << "\n";
+            memory[parameter[0]->address] = nextInput;
+            nextInput = -1;
+        } else if (nextInput == -1 && lastOutput != -1) {
+            std::cout << lastOutput << "\n";
+            memory[parameter[0]->address] = lastOutput;
+            lastOutput = -1;
         } else {
-            if (nextInput != -1) {
-                std::cout << nextInput << "\n";
-                memory[memory[instruction_ptr+1]] = nextInput;
-                nextInput = -1;
-            } else if (nextInput == -1 && lastOutput != -1) {
-                std::cout << lastOutput << "\n";
-                memory[memory[instruction_ptr+1]] = lastOutput;
-                lastOutput = -1;
-            } else {
-                std::cin >> memory[memory[instruction_ptr+1]];
-            }
+            std::cin >> memory[parameter[0]->address];
         }
-        
-        
+    
         return instruction_ptr + parameter_count() + 1;
     }
 };
@@ -40,8 +36,8 @@ class Output : public Instruction {
 
     int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) {
         std::cout << "= " << 
-            parameter[0]->param << "\n";
-        lastOutput = parameter[0]->param;
+            memory[parameter[0]->address] << "\n";
+        lastOutput = memory[parameter[0]->address];
         return instruction_ptr + parameter_count() + 1;
     }
 };

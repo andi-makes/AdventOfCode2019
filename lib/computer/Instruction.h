@@ -14,7 +14,7 @@ int base_ptr = 0;
 
 class Parameter {
 public:
-    int64_t param;
+    int address;
     int mode;
 
     Parameter(const std::vector<int64_t>& memory, int instruction_ptr, int parameter_number, int parameter_count) {
@@ -25,11 +25,11 @@ public:
         mode = (possible / divider) % 10;
 
         if (mode == 1) {
-            param = memory[instruction_ptr + parameter_number +1];
+            address = instruction_ptr + parameter_number +1;
         } else if (mode == 2) {
-            param = memory[base_ptr + memory[instruction_ptr + parameter_number+1]];
-        } else {
-            param = memory[memory[instruction_ptr + parameter_number+1]];
+            address = base_ptr + memory[instruction_ptr + parameter_number+1];
+        } else if (mode == 0) {
+            address = memory[instruction_ptr + parameter_number+1];
         }
     }
 };
@@ -60,12 +60,11 @@ public:
     int execute(std::vector<int64_t>& memory, int& instruction_ptr) {
         if (isEnabled) {
             if (opcode() == memory[instruction_ptr] % 100) {
+                std::cout << "Opcode: " << memory[instruction_ptr] << "\n";
                 std::vector<Parameter*> parameter;
                 for (int i = 0; i < parameter_count(); ++i) {
                     parameter.push_back(new Parameter(memory, instruction_ptr, i, parameter_count()));
                 }
-
-                // std::cout << "{ [" << std::setw(3) << instruction_ptr << "], " << std::setw(4) << memory[instruction_ptr] << " }: ";
 
                 int ret = code(memory, instruction_ptr, parameter);
                 if (ret < 0) {
