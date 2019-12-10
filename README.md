@@ -2,13 +2,17 @@
 
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2019-brightgreen)](https://adventofcode.com/2019/about)
 [![Language](https://img.shields.io/badge/Language-C%2B%2B-orange)](https://isocpp.org/)
-[![Days completed](https://img.shields.io/badge/Days%20completed-9-red)](https://github.com/DragonCoder01/AdventOfCode2019)
-[![Stars](https://img.shields.io/badge/Stars-18-yellow)](https://github.com/DragonCoder01/AdventOfCode2019)
+[![Days completed](https://img.shields.io/badge/Days%20completed-9.5-red)](https://github.com/DragonCoder01/AdventOfCode2019)
+[![Stars](https://img.shields.io/badge/Stars-19-yellow)](https://github.com/DragonCoder01/AdventOfCode2019)
 
 DragonCoder's "**beautiful**" `C++` solutions for Advent of Code 2019!
 
 ## Compiling the code
 I followed [this](https://www.youtube.com/watch?v=HPMvU64RUTY) YT video on How to compile using cmake, I don't have any clues what I am doing. But it works and is fairly easy, so that is good enough :D
+
+## Skipped Challanges
+I've skipped those challanges:
++ [Day 10 Part 2](https://adventofcode.com/2019/day/10): Lazor them Astroids!
 
 ## Check out other solutions...
 ... that probably are better than mine :D

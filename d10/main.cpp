@@ -30,6 +30,9 @@ public:
 };
 
 int main() {
+    std::cout << "Day 10, Part 1\n" << 
+        "There wont be a part 2 solution of this day, that would be kinda crazy with this kind of setup.\n";
+
     std::ifstream input("inputs/d10.txt");
     std::vector<Asteroid*> asteroids;
 
