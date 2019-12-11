@@ -60,7 +60,8 @@ public:
     int execute(std::vector<int64_t>& memory, int& instruction_ptr) {
         if (isEnabled) {
             if (opcode() == memory[instruction_ptr] % 100) {
-                std::cout << "Opcode: " << memory[instruction_ptr] << "\n";
+                // std::cout << "Opcode: " << memory[instruction_ptr] << "\n";
+                std::cout << "Baseptr: " << base_ptr << ", Instructionptr: " << instruction_ptr << "\n";
                 std::vector<Parameter*> parameter;
                 for (int i = 0; i < parameter_count(); ++i) {
                     parameter.push_back(new Parameter(memory, instruction_ptr, i, parameter_count()));

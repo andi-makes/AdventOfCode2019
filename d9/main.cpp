@@ -7,11 +7,11 @@
 int main() {
     InstructionSet instruction_set;
     instruction_set.enable_all();
-
+    nextInput = 2;
     Computer com = Computer(instruction_set.get());
-    // std::vector<int64_t> code{1102,34915192,34915192,7,4,7,99,0};
-    // com.load_memory(code);
     com.load_from_file("inputs/d9.txt");
     com.execute();
+
+    // GOAL: 63441
 }
 // Too low: 21107

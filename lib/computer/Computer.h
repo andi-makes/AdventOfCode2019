@@ -37,7 +37,7 @@ public:
         instruction_ptr_ = 0;
         memory_ = memory;
 
-        for (int i = memory_.size(); i < 2048*2048; ++i) {
+        for (int i = memory_.size(); i < 2048; ++i) {
             memory_.push_back(0);
         }
     }
@@ -51,13 +51,13 @@ public:
         while(std::getline(input, code, ',')) {
             memory_.push_back(std::stoi(code));
         }
-        for (int i = memory_.size(); i < 2048*2048; ++i) {
+        for (int i = memory_.size(); i < 2048; ++i) {
             memory_.push_back(0);
         }
     }
 
     int execute() {
-        for (int j = 0; j < memory_.size(); ++j) {
+        while(true) {
             int exit_code = 0;
             for (int i = 0; i < instruction_set_.size(); ++i) {
                 exit_code = instruction_set_[i]->execute(memory_, instruction_ptr_);
@@ -71,7 +71,6 @@ public:
                 }
             }
         }
-        return 1;
     }
 
     void alter_memory(int64_t new_value, int address) {
