@@ -18,7 +18,7 @@ I've skipped those challanges:
 ... that probably are better than mine :D
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
 + Trojaner's [AdventofCode](https://github.com/TrojanerHD/AdventofCode)
-+ derNiklaas' [Advent-of-Code-2019](https://github.com/derNiklaas/Advent-of-Code-2019)
++ derNiklaas' [Advent-of-Code](https://github.com/derNiklaas/Advent-of-Code)
 + LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
 + networkException's [AdventOfCode](https://github.com/dejakobniklas/AdventOfCode)
 + joblo2213's [AdventOfCode2019](https://github.com/joblo2213/AdventOfCode2019)
