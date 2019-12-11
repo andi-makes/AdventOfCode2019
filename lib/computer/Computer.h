@@ -16,6 +16,12 @@ private:
     int instruction_ptr_;
     bool halt_on_output_;
 public:
+    void expand_memory(int address) {
+        for (int i = memory_.size(); i < address+1; ++i) {
+            memory_.push_back(0);
+        }
+    }
+
     void printInstructionSet() {
         for (int i = 0; i < instruction_set_.size(); ++i) {
             std::cout << instruction_set_[i]->opcode() << ", ";
@@ -37,9 +43,9 @@ public:
         instruction_ptr_ = 0;
         memory_ = memory;
 
-        for (int i = memory_.size(); i < 2048; ++i) {
-            memory_.push_back(0);
-        }
+        // for (int i = memory_.size(); i < 2048; ++i) {
+        //     memory_.push_back(0);
+        // }
     }
 
     void load_from_file(std::string filename) {
@@ -51,9 +57,9 @@ public:
         while(std::getline(input, code, ',')) {
             memory_.push_back(std::stoi(code));
         }
-        for (int i = memory_.size(); i < 2048; ++i) {
-            memory_.push_back(0);
-        }
+        // for (int i = memory_.size(); i < 2048; ++i) {
+        //     memory_.push_back(0);
+        // }
     }
 
     int execute() {
@@ -74,10 +80,14 @@ public:
     }
 
     void alter_memory(int64_t new_value, int address) {
+        if (address >= memory_.size())
+            expand_memory(address);
         memory_[address] = new_value;
     }
 
     int read_memory(int address) {
+        if (address >= memory_.size())
+            expand_memory(address);
         return memory_[address];
     }
 
@@ -85,7 +95,5 @@ public:
         return memory_;
     }
 };
-
-
 
 #endif
