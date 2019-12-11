@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <cmath>
 
+#include "Computer.h"
+
 #define SUCCESSFUL_INSTRUCTION 0
 #define FAILED_INSTRUCTION -2
 #define HALT_INSTRUCTION -1
@@ -38,7 +40,7 @@ class Instruction {
 private:
     bool isEnabled;
 public:
-    virtual int code(std::vector<int64_t>& memory, int instruction_ptr, std::vector<Parameter*>& parameter) = 0;
+    virtual int code(Computer& com, std::vector<Parameter*>& parameter) = 0;
 
     virtual int opcode() = 0;
     virtual int parameter_count() = 0;
@@ -57,21 +59,21 @@ public:
         return isEnabled;
     }
 
-    int execute(std::vector<int64_t>& memory, int& instruction_ptr) {
+    int execute(Computer& com) {
         if (isEnabled) {
-            if (opcode() == memory[instruction_ptr] % 100) {
+            if (opcode() == com.read_memory(com.instruction_ptr_) % 100) {
                 // std::cout << "Opcode: " << memory[instruction_ptr] << "\n";
-                std::cout << "Baseptr: " << base_ptr << ", Instructionptr: " << instruction_ptr << "\n";
+                std::cout << "Baseptr: " << base_ptr << ", Instructionptr: " << com.instruction_ptr_ << ", Opcode: " << com.read_memory(com.instruction_ptr_) << "\n";
                 std::vector<Parameter*> parameter;
                 for (int i = 0; i < parameter_count(); ++i) {
-                    parameter.push_back(new Parameter(memory, instruction_ptr, i, parameter_count()));
+                    parameter.push_back(new Parameter(com.get_memory(), com.instruction_ptr_, i, parameter_count()));
                 }
 
-                int ret = code(memory, instruction_ptr, parameter);
+                int ret = code(com, parameter);
                 if (ret < 0) {
                     return HALT_INSTRUCTION;
                 } else {
-                    instruction_ptr = ret;
+                    com.instruction_ptr_ = ret;
                     return SUCCESSFUL_INSTRUCTION;
                 }
             }

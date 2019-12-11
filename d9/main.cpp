@@ -7,10 +7,11 @@
 int main() {
     InstructionSet instruction_set;
     instruction_set.enable_all();
-    nextInput = 2;
-    Computer com = Computer(instruction_set.get());
+    
+    Computer com;
     com.load_from_file("inputs/d9.txt");
-    com.execute();
+
+    instruction_set.execute(com);
 
     // GOAL: 63441
 }

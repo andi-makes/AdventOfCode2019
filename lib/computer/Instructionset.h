@@ -7,6 +7,7 @@
 #include "Conditionals.h"
 #include "Halt.h"
 #include "Base.h"
+#include "Computer.h"
 
 #include <iostream>
 #include <vector>
@@ -54,6 +55,29 @@ public:
     
     std::vector<Instruction*> get() {
         return instruction_set_;
+    }
+
+    int execute(Computer& com) {
+        while(true) {
+            int res = step(com);
+            if (res == -1) {
+                std::cout << "Could not find command\n";
+            } else if (res == 0) {
+                return 0;
+            }
+        }
+    }
+
+    int step(Computer& com) {
+        for (int i = 0; i < instruction_set_.size(); ++i) {
+            int exit_code = instruction_set_[i]->execute(com);
+            if (exit_code == SUCCESSFUL_INSTRUCTION) { // FIXME Halt on Output
+                return 1;
+            } else if (exit_code == HALT_INSTRUCTION) {
+                return 0;
+            }
+        }
+        return -1;
     }
 };
 
