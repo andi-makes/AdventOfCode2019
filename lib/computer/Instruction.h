@@ -63,7 +63,7 @@ public:
         if (isEnabled) {
             if (opcode() == com.read_memory(com.instruction_ptr_) % 100) {
                 // std::cout << "Opcode: " << memory[instruction_ptr] << "\n";
-                std::cout << "Baseptr: " << base_ptr << ", Instructionptr: " << com.instruction_ptr_ << ", Opcode: " << com.read_memory(com.instruction_ptr_) << "\n";
+                // std::cout << "Baseptr: " << base_ptr << ", Instructionptr: " << com.instruction_ptr_ << ", Opcode: " << com.read_memory(com.instruction_ptr_) << "\n";
                 std::vector<Parameter*> parameter;
                 for (int i = 0; i < parameter_count(); ++i) {
                     parameter.push_back(new Parameter(com.get_memory(), com.instruction_ptr_, i, parameter_count()));

@@ -9,7 +9,6 @@ class JMP_True : public Instruction {
     int parameter_count() { return 2; }
 
     int code(Computer& com, std::vector<Parameter*>& parameter) {
-        std::cout << parameter[0]->address << ", " << com.read_memory(parameter[0]->address) << "\n";
         if (com.read_memory(parameter[0]->address)) {
             return com.read_memory(parameter[1]->address);
         } else {

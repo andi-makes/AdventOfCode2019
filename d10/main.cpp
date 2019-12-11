@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <map>
 #include <string>
 
 class Asteroid {
@@ -30,35 +31,68 @@ public:
 };
 
 int main() {
-    std::cout << "Day 10, Part 1\n" << 
-        "There wont be a part 2 solution of this day, that would be kinda crazy with this kind of setup.\n";
+    Asteroid* base;
+    {
+        std::cout << "Day 10, Part 1\n" << 
+            "There wont be a part 2 solution of this day, that would be kinda crazy with this kind of setup.\n";
 
-    std::ifstream input("inputs/d10.txt");
-    std::vector<Asteroid*> asteroids;
+        std::ifstream input("inputs/d10.txt");
+        std::vector<Asteroid*> asteroids;
 
-    std::string line;
-    while(std::getline(input, line)) {
-        static int y = 0;
-        for (int i = 0; i < line.size(); ++i) {
-            if (line[i] == '#') {
-                asteroids.push_back(new Asteroid(i, y));
+        std::string line;
+        while(std::getline(input, line)) {
+            static int y = 0;
+            for (int i = 0; i < line.size(); ++i) {
+                if (line[i] == '#') {
+                    asteroids.push_back(new Asteroid(i, y));
+                }
+            }
+            ++y;
+        }
+
+        int max_asteroids = 0;
+        int x, y;
+        for (Asteroid* a : asteroids) {
+            int ast_count = a->asteroids_in_sight(asteroids);
+            if (ast_count > max_asteroids) {
+                max_asteroids = ast_count;
+                x = a->x_;
+                y = a->y_;
+                base = a;
             }
         }
-        ++y;
+        std::cout << asteroids.size() << ", " << x << ", " << y << "\n";
+        std::cout << "Number of asteroids in sight: " << max_asteroids << "\n";
     }
 
-    int max_asteroids = 0;
-    int x, y;
-    for (Asteroid* a : asteroids) {
-        int ast_count = a->asteroids_in_sight(asteroids);
-        if (ast_count > max_asteroids) {
-            max_asteroids = ast_count;
-            x = a->x_;
-            y = a->y_;
-        }
-    }
-    std::cout << asteroids.size() << ", " << x << ", " << y << "\n";
-    std::cout << "Number of asteroids in sight: " << max_asteroids << "\n";
+    // {
+    //     std::ifstream input("inputs/d10.txt");
+    //     std::map<double, std::vector<Asteroid*>> asteroids;
+
+    //     std::string line;
+    //     while(std::getline(input, line)) {
+    //         static int y = 0;
+    //         for (int i = 0; i < line.size(); ++i) {
+    //             if (line[i] == '#') {
+    //                 asteroids.push_back(new Asteroid(i, y));
+    //             }
+    //         }
+    //         ++y;
+    //     }
+
+    //     int max_asteroids = 0;
+    //     int x, y;
+    //     for (Asteroid* a : asteroids) {
+    //         int ast_count = a->asteroids_in_sight(asteroids);
+    //         if (ast_count > max_asteroids) {
+    //             max_asteroids = ast_count;
+    //             x = a->x_;
+    //             y = a->y_;
+    //         }
+    //     }
+    //     std::cout << asteroids.size() << ", " << x << ", " << y << "\n";
+    //     std::cout << "Number of asteroids in sight: " << max_asteroids << "\n";
+    // }
 }
 
 // Wrong: 210, 36, 206

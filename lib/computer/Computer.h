@@ -36,7 +36,7 @@ public:
 
         std::string code;
         while(std::getline(input, code, ',')) {
-            memory_.push_back(std::stoi(code));
+            memory_.push_back(std::stoll(code));
         }
     }
 

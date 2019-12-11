@@ -4,6 +4,8 @@ include_directories(lib/)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
+set(CMAKE_BUILD_TYPE Debug)
+
 add_executable(d1.x d1/main.cpp)
 add_executable(d2.x d2/main.cpp)
 add_executable(d3.x d3/main.cpp)
