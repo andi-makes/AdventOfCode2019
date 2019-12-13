@@ -51,7 +51,7 @@ class Output : public Instruction {
     int parameter_count() { return 1; }
 
     int code(Computer& com, std::vector<Parameter*>& parameter) {
-        std::cout << "= " << com.read_memory(parameter[0]->address) << "\n";
+        // std::cout << "= " << com.read_memory(parameter[0]->address) << "\n";
         int64_t output = com.read_memory(parameter[0]->address);
         if (enableISR) outISR(output);
         return com.instruction_ptr_ + parameter_count() + 1;
