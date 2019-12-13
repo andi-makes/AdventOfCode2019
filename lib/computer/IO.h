@@ -17,12 +17,13 @@ class Input : public Instruction {
     int parameter_count() { return 1; }
 
     int code(Computer& com, std::vector<Parameter*>& parameter) {
-        std::cout << "Input := ";
+        // std::cout << "Input := ";
         int64_t a = 0;
         if (enableISR) {
             a = inISR();
-            std::cout << a << "\n";
+            // std::cout << a << "\n";
         } else {
+            std::cout << "Input := ";
             std::cin >> a;
         }
 
