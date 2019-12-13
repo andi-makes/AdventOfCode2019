@@ -8,16 +8,14 @@
 #include <thread>
 
 int ball_pos = 16;
-int ball_dir = 0;
 int paddle_pos = 0;
 
 int64_t IN_ISR() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1));
     mvprintw(1, 50, "                ");
     mvprintw(2, 50, "                ");
     mvprintw(3, 50, "                ");
 
-    mvprintw(1, 50, "%2d", ball_dir);
     mvprintw(2, 50, "%d", ball_pos);
     mvprintw(3, 50, "%d", paddle_pos);
     refresh();
@@ -34,7 +32,7 @@ void OUT_ISR(int64_t a) {
     static std::array<int, 3> buf;
     static int i = 0;
 
-    std::this_thread::sleep_for(std::chrono::nanoseconds(10));
+    // std::this_thread::sleep_for(std::chrono::nanoseconds(10));
 
     buf[i] = a;
 
@@ -60,7 +58,6 @@ void OUT_ISR(int64_t a) {
                 break;
             case 4: // Ball
                 mvprintw(buf[1], buf[0], "O");
-                ball_dir = ball_pos - buf[0];
                 ball_pos = buf[0];
                 break;
         }
