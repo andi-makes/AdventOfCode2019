@@ -84,15 +84,4 @@ int main() {
     store["FUEL"]->order(1, store);
 
     std::cout << store["ORE"]->quantity_ << "\n";
-
-    long ores = 1000000000000;
-    long first_estimate = ores / store["ORE"]->quantity_;
-    std::cout << first_estimate << "\n";
-    store["FUEL"]->order(first_estimate-1, store);
-
-    for (long i = first_estimate; store["ORE"]->quantity_ < ores; ++i) {
-        store["FUEL"]->order(1, store);
-        std::cout << i << "\n";
-    }
-    std::cout << store["FUEL"]->quantity_ << "\n";
 }
