@@ -84,4 +84,9 @@ int main() {
     store["FUEL"]->order(1, store);
 
     std::cout << store["ORE"]->quantity_ << "\n";
+
+    for (int i = 1; store["ORE"]->quantity_ < 1000000000000; ++i) {
+        store["FUEL"]->order(i, store);
+        std::cout << store["FUEL"]->quantity_ << ", " << store["ORE"]->quantity_ << "\n";
+    }
 }
