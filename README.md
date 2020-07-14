@@ -7,6 +7,8 @@
 
 DragonCoder's "**beautiful**" `C++` solutions for Advent of Code 2019!
 
+You can find my original solutions in the `old` folder.
+
 ## Compiling the code
 I followed [this](https://www.youtube.com/watch?v=HPMvU64RUTY) YT video on How to compile using cmake, I don't have any clues what I am doing. But it works and is fairly easy, so that is good enough :D
 
