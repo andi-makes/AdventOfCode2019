@@ -10,6 +10,25 @@ int main() {
 
 	Standalone app{ "AoC 2019" };
 	while (app.run([&com](bool& running) {
+		auto& io = ImGui::GetIO();
+
+		if (io.KeyCtrl && io.KeysDown[GLFW_KEY_W]) {
+			running = false;
+			return;
+		}
+
+		if (ImGui::BeginMenuBar()) {
+			if (ImGui::BeginMenu("Files")) {
+				if (ImGui::MenuItem("Exit", "Ctrl+W")) {
+					running = false;
+					return;
+				}
+				ImGui::EndMenu();
+			}
+
+			ImGui::EndMenuBar();
+		}
+
 		if (ImGui::BeginTabBar("Days")) {
 			if (ImGui::BeginTabItem("Computer")) {
 				if (ImGui::CollapsingHeader("Memory")) {

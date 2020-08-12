@@ -15,7 +15,8 @@ namespace {
 Standalone::Standalone(std::string title) : title(std::move(title)) {
 	glfwSetErrorCallback(glfw_error_callback);
 	if (!glfwInit()) {
-		// Todo: Throw exception or something
+		std::cerr << "Could not initialize GLFW, so be ready for bad things to happen."
+				  << std::endl;
 	}
 
 	const char* glsl_version = "#version 130";
@@ -32,14 +33,15 @@ Standalone::Standalone(std::string title) : title(std::move(title)) {
 	window = glfwCreateWindow(1, 1, title.c_str(), nullptr, nullptr);
 
 	if (window == nullptr) {
-		// Todo: Throw exception or something
+		std::cerr << "Could not create a Window, so be ready for bad things to happen."
+				  << std::endl;
 	}
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
 	if (gladLoadGL() == 0) {
-		std::cerr << "Failed to initialize OpenGL loader!" << std::endl;
-		// Todo: Throw exception or something
+		std::cerr << "Failed to initialize OpenGL loader, so be ready for bad things to happen."
+				  << std::endl;
 	}
 
 	IMGUI_CHECKVERSION();
@@ -82,7 +84,7 @@ bool Standalone::run(const std::function<void(bool&)>& function) {
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin(title.c_str(), &running);
+	ImGui::Begin(title.c_str(), &running, ImGuiWindowFlags_MenuBar);
 
 	function(running);
 
