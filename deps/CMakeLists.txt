@@ -1,7 +1,7 @@
 # Glad
 add_library(
-    glad
-    glad/src/glad.c
+        glad
+        glad/src/glad.c
 )
 target_include_directories(glad PUBLIC glad/include)
 
@@ -15,5 +15,5 @@ add_library(imgui
         imgui/imgui_widgets.cpp
         imgui/imgui_stdlib.cpp
         )
-target_include_directories(imgui PUBLIC imgui)
 target_link_libraries(imgui PRIVATE glfw glad)
+target_include_directories(imgui PUBLIC imgui)

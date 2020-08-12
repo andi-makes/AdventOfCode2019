@@ -1,23 +1,22 @@
 #pragma once
 
+#include "glad/glad.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-#include "glad/glad.h"
-
 #include <GLFW/glfw3.h>
-
 #include <functional>
 #include <string>
 
 class Standalone {
-    GLFWwindow* window;
+	GLFWwindow* window;
 
-    std::string title;
+	std::string title;
+
 public:
-    explicit Standalone(std::string  title);
-    ~Standalone();
+	explicit Standalone(std::string title);
+	~Standalone();
 
-    bool run(const std::function<bool()>& function);
+	bool run(const std::function<void(bool&)>& function);
 };
