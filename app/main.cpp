@@ -9,19 +9,36 @@ int main() {
 	Computer com;
 
 	Standalone app{ "AoC 2019" };
-	while (app.run([&com](bool& running) {
+
+	bool show_demo_window = false;
+	bool show_file_popup  = false;
+
+	while (app.run([&](bool& running) {
 		auto& io = ImGui::GetIO();
 
 		if (io.KeyCtrl && io.KeysDown[GLFW_KEY_W]) {
 			running = false;
 			return;
+		} else if (io.KeyCtrl && io.KeysDown[GLFW_KEY_O] && !show_file_popup) {
+			show_file_popup = true;
 		}
 
 		if (ImGui::BeginMenuBar()) {
 			if (ImGui::BeginMenu("Files")) {
+				if (ImGui::MenuItem("Load File", "Ctrl+O")) {
+					show_file_popup = true;
+				}
+
 				if (ImGui::MenuItem("Exit", "Ctrl+W")) {
 					running = false;
 					return;
+				}
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Development")) {
+				if (ImGui::MenuItem("Toggle Demo Window")) {
+					show_demo_window = !show_demo_window;
 				}
 				ImGui::EndMenu();
 			}
@@ -92,6 +109,12 @@ int main() {
 				ImGui::EndTabItem();
 			}
 			ImGui::EndTabBar();
+
+			ImGui::End();
+
+			if (show_demo_window) {
+				ImGui::ShowDemoWindow(&show_demo_window);
+			}
 		}
 	}))
 		;
